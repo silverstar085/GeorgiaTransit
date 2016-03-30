@@ -1,0 +1,34 @@
+self.addEventListener('install', function(event)
+ {
+    event.waitUntil(
+        caches.open('gettickets-static-v6').then(function(cache){
+            return cache.addAll([
+                'skeleton.html',
+        'source/css/materialize.min.css',
+        'source/css/style.css',
+        'source/js/jquery.js',
+        'source/js/script.js',
+        'source/js/materialize.min.js'
+    ]);
+        })
+    );
+});
+
+self.addEventListener("offline", function(e) { console.log("offline"); });
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    // try to return untouched request from network first
+    fetch(event.request.url).catch(function() {
+      // if it fails, try to return request from the cache
+      return caches.match(event.request).then(function(response) {
+        if (response) {
+          return response;
+        }
+        // if not found in cache, return default offline content
+        if (event.request.headers.get('accept').includes('text/html')) {
+          return caches.match('skeleton.html');
+        }
+      })
+    })
+  );
+});

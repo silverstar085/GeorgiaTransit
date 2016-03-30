@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Schedules</title>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="source/css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="source/css/style.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+            <div class="container">
+                <div class="navigationbar">
+                   <nav class="nbar" role="navigation">
+                        <div class="nav-wrapper container">
+                            <a href="index.html" class="brand-logo">Georgia Travel</a>
+                            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                              <ul class="right hide-on-med-and-down">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="tinfo.html">Train info</a></li>
+                                <li><a href="schedule.html">Schedules</a></li>
+                                <li><a href="binfo.html">Bus info</a></li>
+                                <li><a href="contact.html">Contact Me</a></li>
+                              </ul>
+                              <ul class="side-nav" id="mobile-demo">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="tinfo.html">Train info</a></li>
+                                <li><a href="schedule.html">Schedules</a></li>
+                                <li><a href="binfo.html">Bus info</a></li>
+                                <li><a href="contact.html">Contact Me</a></li>
+                              </ul>
+                        </div>
+                   </nav>
+                </div>
+                <h3>Map & Timings(Train)</h3>
+                <div class="pdfimages">
+                    <div class="row">
+                       <div class="col s6 m6 l3 offset-l4">
+                            <div class="n6 card center-align z-depth-0">
+                                <div class="card-image hoverable"> 
+                                    <a href="source/pdf/tmap.pdf">
+                                    <img src="source/img/scheduleicon.png" alt="Schedule Image"> 
+                                    </a>
+                                </div>
+                                <div class="card-action"> 
+                                    <a href="source/pdf/tmap.pdf">Download/Open the PDF</a>                                                          
+                                </div>
+                                <div class="links">
+                                All the information is provided by MARTA!
+                                </div>
+                            </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="source/js/materialize.min.js"></script>
+      <script type="text/javascript" src="source/js/script.js"></script>
+        <script>
+          $(document).ready(function() 
+        {
+	      $(".button-collapse").sideNav();
+        });      
+      </script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "gtransit",
+  "version": "1.0.0",
+  "description": "georgia transit",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silverstar085/Gtransit.git"
+  },
+  "author": "Neil Shah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silverstar085/Gtransit/issues"
+  },
+  "homepage": "https://github.com/silverstar085/Gtransit#readme",
+  "devDependencies": {
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-install": "^0.6.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-uglify": "^1.5.3"
+  }
+}

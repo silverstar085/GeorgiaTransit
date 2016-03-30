@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Train - No Network!</title>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <div class="container">
+                <div class="navigationbar">
+                   <nav class="nbar" role="navigation">
+                        <div class="nav-wrapper container">
+                            <a href="index.html" class="brand-logo">Georgia Travel</a>
+                            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                              <ul class="right hide-on-med-and-down">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="tinfo.html">Train info</a></li>
+                                <li><a href="schedule.html">Schedules</a></li>
+                                <li><a href="binfo.html">Bus info</a></li>
+                                <li><a href="contact.html">Contact Me</a></li>
+                              </ul>
+                              <ul class="side-nav" id="mobile-demo">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="tinfo.html">Train info</a></li>
+                                <li><a href="schedule.html">Schedules</a></li>
+                                <li><a href="binfo.html">Bus info</a></li>
+                                <li><a href="contact.html">Contact Me</a></li>
+                              </ul>
+                        </div>
+                   </nav>
+                </div>
+                <h3>Georgia Train Schedule - No Network</h3>
+                <div id = "toastmsg" class = "toastmsg">
+                </div>
+    <form id="live-search" class="styled" method="post">
+    <div class="field">
+        FROM:
+        <input type="text" class="text-input" id="filter" />
+        <span id="filter-count"></span>
+        <br/>
+        TO:
+        <input type="text" class="text-input" id="filterme" value="" />
+        <span id="filter-count2"></span>
+        <button class="btn waves-effect waves-light" type="reset" id = "search" name="action">SEARCH
+        <i class="material-icons right">search</i>
+        </button>
+<!--
+        <input type="text" id="key" placeholder="Key"><br/>
+        <button id="getButton" type="button">Get Data</button>
+-->
+        <div id = "time"></div>
+        <div id = "data"></div>
+        
+    </div>
+        
+</form>
+<div class = "search" id="working"></div>
+<!--
+<div class = "search" id="id01">
+</div>
+-->
+<!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="source/js/materialize.min.js"></script>
+      <script type="text/javascript" src="source/js/script1.js"></script>
+<!--      <script type="text/javascript" src="source/js/dbase.js"></script>-->      
+
+<script> 
+document.addEventListener("DOMContentLoaded", function() 
+{
+	
+//	if(!indexedDBOk) return;
+	var openRequest = indexedDB.open("tdatabase",8);
+	openRequest.onsuccess = function(e) 
+    {
+        console.log("DB loaded!");
+		db = e.target.result;
+		//Listen for add clicks
+//		document.querySelector("#getButton").addEventListener("click", getData, false);
+//        document.querySelector("#search").addEventListener("click", getALL, false);
+        window.addEventListener("load", getALL, false);
+	}	
+	openRequest.onerror = function(e) 
+    {
+		//Do something for the error
+	}
+},false);
+    
+    function getData(e) 
+{
+    var key = document.querySelector("#key").value;
+    if(key === "" || isNaN(key)) return;
+ 
+    var transaction = db.transaction("TRAIN","readonly");
+    var store = transaction.objectStore("TRAIN");
+ 
+    var request = store.get(key);
+ 
+    request.onsuccess = function(e) 
+    {
+        console.log('Getting Request!');
+        var result = e.target.result;
+        console.dir(result);
+        if(result) 
+        {
+            var s = "<h2>Key "+key+"</h2><p>";
+            for(var field in result) 
+            {
+                s+= field+"="+result[field]+"<br/>";
+            }
+            document.querySelector("#data").innerHTML = s;
+        } else 
+        {
+            document.querySelector("#data").innerHTML = "<h2>No match</h2>";
+        }   
+    }   
+}
+    function getALL(e)
+{
+
+    var transaction = db.transaction("TRAIN","readonly");
+    var store = transaction.objectStore("TRAIN");
+    var index = store.index("StationName");
+    
+    var s = "";
+//    var t = "";
+    
+    index.openCursor().onsuccess = function(e)
+    {
+        var cursor = e.target.result;
+        if(cursor)
+            {
+//                var list = document.createElement('table'), tr, td, row, cell;  
+                
+                s += "<table><tr><th>Direction:</th><td>" + 
+                    cursor.value.DIRECTION + 
+                    "</td><th>Destination:</th><td>" + 
+                    cursor.value.DESTINATION + 
+                    "</td><th>Event Time:</th><td>" + 
+                    cursor.value.EVENT_TIME + 
+                    "</td><th>Train Station:</th><td>" + 
+                    cursor.value.STATION + 
+                    "</td><th>Waiting time:</th><td>" + 
+                    cursor.value.WAITING_TIME + 
+                    "</td><th>Line:</th><td>" + 
+                    cursor.value.LINE + 
+                    "</td><th>Train ID:</th><td>" + 
+                    cursor.value.TRAIN_ID + 
+                    "</td>"+"</tr></table>";
+                
+//                for(var field in cursor.value) 
+//                {
+////                    s+= field+"="+cursor.value[field]+"<br/>";
+//                }
+//                    s+="</table>";
+//                console.log(cursor.primaryKey);
+                    cursor.continue();
+            }
+        document.querySelector("#working").innerHTML = s;
+    }
+ 
+}
+</script>
+ <script>
+ $(document).ready(function(){
+    $('#working').hide();
+    $("#filter").keyup(function(){
+        // Retrieve the input field text and reset the count to zero
+        var filter = $(this).val(), count = 0; 
+        // Loop through the comment list
+        $(".search tr").each(function()
+        {
+ 
+            // If the list item does not contain the text phrase fade it out
+            if ($(this).text().search(new RegExp(filter, "i")) < 0)             {
+                $(this).fadeOut();
+            // Show the list item if the phrase matches and increase the count by 1
+            } else 
+            {
+                $(this).show();
+                count++;
+            }
+        });
+ 
+        // Update the count
+        var numberItems = count;
+        $("#filter-count").text("Number of Trains = "+count);
+             
+    });    
+});   
+</script>      
+    <script>
+        $(document).ready(function(){
+        $( "#search" ).click(function() {
+        $('#working').show();
+         });
+         });
+    </script>
+        </div>
+    <script>
+        $(document).ready(function() 
+        {
+            $(".button-collapse").sideNav();
+        });
+        Materialize.toast('It looks like you are out of network. No worries! You can still use the last fetched data.', 5000, "toastmsg")
+    </script>
+                    
+    </body>
+</html>
