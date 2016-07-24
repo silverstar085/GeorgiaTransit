@@ -10,7 +10,7 @@ document.getElementById("time").innerHTML = datetime;
 //____________________________
 
 var xmlhttp = new XMLHttpRequest();
-var url = "https://jsonp.afeld.me/?url=http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus";
+var url = "https://crossorigin.me/http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus";
 if('withCredentials' in xmlhttp)
 {    
 xmlhttp.open("GET", url, true);  
