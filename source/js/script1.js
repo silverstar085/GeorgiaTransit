@@ -6,7 +6,7 @@
 //________________
 
 var xmlhttp = new XMLHttpRequest();
-var url = "https://jsonp.afeld.me/?url=http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=9b3fd45f-5b07-481c-8b3a-74b5e987d7fd";
+var url = "https://crossorigin.me/http://developer.itsmarta.com/RealtimeTrain/RestServiceNextTrain/GetRealtimeArrivals?apikey=9b3fd45f-5b07-481c-8b3a-74b5e987d7fd";
 if('withCredentials' in xmlhttp)
 {    
 xmlhttp.open("GET", url, true);
