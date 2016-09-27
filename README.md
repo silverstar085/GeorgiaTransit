@@ -7,36 +7,25 @@ This is a responsive web application which will allow users to get real time bus
 Download Materialize frame work to style the CSS with material design. 
 Clike [here](http://materializecss.com) to download Materialize
 
-Download the following dependencies: 
+## Getting Started
 
-
-1. `npm install --save-dev gulp-install`
-2. `npm install --save-dev gulp-autoprefixer`
-3. `npm install --save-dev gulp-concat`
-4. `npm install --save-dev gulp-cssmin`
-5. `npm install gulp-sass --save-dev`
-6. `npm install --save-dev gulp-uglify`
-
-
-Also, after transferring HTML files to the distribution folder, make sure to change the source for javascript and css files. 
-
-##Usage
-Here is an example to concatenate and minify all javascript files into one. 
-```javascript
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-
-
-gulp.task('scripts', function() {
-	gulp.src(['js/**/*.js'])
-		.pipe(concat('all.js'))
-                .pipe(uglify())
-		.pipe(gulp.dest('./dist/js'));
-});
+Run the following to install all the dependencies:
+```
+npm install
 ```
 
-##License
-This project is licensed under MIT. 
+## Built With
+
+* Materialize CSS
+* Marta API
+
+## Authors
+
+**Neil Shah** 
+
+## License
+
+This project is licensed under the MIT License.
+
 
 
