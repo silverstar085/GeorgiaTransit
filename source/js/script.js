@@ -5,7 +5,7 @@
                 + currentdate.getHours() + ":"  
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
-document.getElementById("time").innerHTML = datetime;
+//document.getElementById("time").innerHTML = datetime;
 
 //____________________________
 
